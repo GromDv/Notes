@@ -1,10 +1,7 @@
-import clsnote as note
-
 class view:
 
-    def __init__(self, menu, db):
+    def __init__(self, menu):
         self.menu = menu
-        self.db = db
 
     def Prompt(self):
         inpt = int(input(f"{self.menu.ToString()}"))
@@ -13,30 +10,18 @@ class view:
     def show(self, mystr):
         print(mystr)
 
-    def showDB(self):
+    def showDB(self, dbNotes):
         print()
-        print("Список заметок:")
-        print(self.db.toString())
+        print("Список заметок по порядку:")
+        dbNotes.sortId()
+        print(repr(dbNotes))
+        #print(dbNotes.toString())
 
-    def saveDB(self):
-        with open("data.csv","w") as fp:
-            fp.write(self.db.toString())
-    
-    def restoreDB(self):
-        self.db.clearDB()
-        fp = open("data.csv","r")
-        for line in fp:
-            line = str(line).replace("\n","")
-            strl = str(line).split(";")
- #           print(strl)
-            tit = strl[2]
-            txt = strl[3]
-            dt = strl[1]
-            nm = strl[0]
- #           print(strl)
-            nt = note.note(nm, tit, txt, dt)
-            self.db.appendNote(nt)
-        fp.close()
+    def showDBDate(self, dbNotes):
+        print()
+        print("Список заметок по времени:")
+        dbNotes.sortTime()
+        print(repr(dbNotes))
 
     @staticmethod
     def showStr(mystr):

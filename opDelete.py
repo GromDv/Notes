@@ -1,9 +1,10 @@
 class opDelete:
 
-    def execute(self, view):
+    def execute(self, view, dbNotes):
         num = view.getUserNum()
-        nt = view.db.getNoteByNum(num-1)
+        nt = dbNotes.getNoteByNum(num)
         if nt == -1:
             return "Нет такой заметки!"
-        view.db.removeNote(num-1)
+        dbNotes.removeNote(num)
         return "\n"
+    
