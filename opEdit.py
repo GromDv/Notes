@@ -4,19 +4,19 @@ from datetime import datetime
 
 class opEdit:
 
-    def execute(self, view):
+    def execute(self, view, dbNotes):
         mystr = "Редактируем: "
         num = view.getUserNum()
-        nt = view.db.getNoteByNum(num-1)
+        nt = dbNotes.getNoteByNum(num)
         if nt == -1:
             return "Нет такой заметки!"
         vw.view.showStr(mystr)
-        vw.view.showStr(nt.toString())
-        strnt = str(nt.toString()).split(";")
+        vw.view.showStr(repr(nt))
         tit = view.getUserTitle()
         txt = view.getUserText()
         dt = datetime.now()
         date = dt.strftime("%Y-%m-%d %H:%M:%S")
         nt = note.note(num, tit, txt, date)
-        view.db.replaceNote(num-1, nt)
+        dbNotes.replaceNote(num, nt)
         return "\n"
+    

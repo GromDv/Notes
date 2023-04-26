@@ -1,7 +1,21 @@
+from exportImport import expImp  as exp
+
 class listNotes:
 
     def __init__(self) -> None:
         self.dbListNotes = []
+
+    def __repr__(self) -> str:
+        strdb = ""
+        for line in self.dbListNotes:
+            strdb += repr(line) + "\n"
+        return strdb
+    
+    def sortTime(self):
+        self.dbListNotes.sort(key=lambda note: note.getDate(), reverse=True)
+
+    def sortId(self):
+        self.dbListNotes.sort(key=lambda note: note.getNum() )
 
     def toString(self):
         str = ""
@@ -22,14 +36,23 @@ class listNotes:
         self.dbListNotes.clear()
 
     def getNoteByNum(self, num):
-        if num >= 0 and num < len(self.dbListNotes):
-            return self.dbListNotes[num]
+        for note in self.dbListNotes:
+            if note.getNum() == num:
+                return note
         else:
             return -1
         
     def replaceNote(self, num, nt):
-        self.dbListNotes.pop(num)
-        self.dbListNotes.insert(num, nt)
+        for note in self.dbListNotes:
+            if note.getNum() == num:
+                self.dbListNotes.remove(note)
+                self.dbListNotes.append(nt)
 
     def removeNote(self, num):
-        self.dbListNotes.pop(num)
+        for note in self.dbListNotes:
+            if note.getNum() == num:
+                self.dbListNotes.remove(note)
+
+    def importFromCsv(self):
+        exp.restoreDB(self, self.dbListNotes)
+        

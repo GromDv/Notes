@@ -12,8 +12,14 @@ class note:
         else:
             self.date = dt 
 
+    def __repr__(self) -> str:
+        return str(self.id) + ". " + self.date + "   " + self.title + "   " + str(self.text) + ";"
+    
     def toString(self):
         return str(self.id) + ";" + self.date + ";" + self.title + ";" + str(self.text) 
     
     def getNum(self):
         return int(self.id)
+    
+    def getDate(self):
+        return str(self.date)

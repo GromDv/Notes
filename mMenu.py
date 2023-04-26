@@ -5,7 +5,7 @@ class mMenu:
 
     def ToString(self):
         res = "=======================================\n"
-        res += "Чтобы выполнить операцию введите номер:\n"
+        res += "Для работы с заметками введите номер:\n"
         for mp in self.menu:
             res += str(mp.num) + " - " + mp.title + "\n"
         res += ": "

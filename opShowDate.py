@@ -1,6 +1,6 @@
-class opShow:
+class opShowDate:
 
     def execute(self, view, dbNotes):
-        view.showDB(dbNotes)
+        view.showDBDate(dbNotes)
         return "\n"
     
